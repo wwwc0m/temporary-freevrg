@@ -1,0 +1,2789 @@
+{
+  "version": "1.4",
+  "snapshot_date": "2026-06-21",
+  "description": "Field-level audit conclusions for the FreeVRG v1.4 snapshot; raw advisory and upstream metadata are collected from official repositories.",
+  "expected_stats": {
+    "total": 368,
+    "freebsd_sa": 236,
+    "upstream_commit": 132,
+    "priority": 234,
+    "kernel": 133,
+    "quality_3": 300,
+    "quality_2": 65,
+    "quality_1": 3,
+    "quality_3_priority": 177
+  },
+  "exclude_freebsd": {
+    "FreeBSD-SA-15:05": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:07": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:11": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:17": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:23": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:25": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-15:27": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:02": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:08": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:09": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:13": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:16": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:24": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:28": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:34": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-16:39": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-17:03": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-17:05": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-18:02": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-18:03": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-18:07": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-18:09": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-18:11": {
+      "reason": "Standalone hostapd/EAPOL issue was excluded from the v1.4 base-system target set."
+    },
+    "FreeBSD-SA-19:04": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-19:07": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-19:25": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-19:26": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-20:09": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-20:19": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-20:22": {
+      "reason": "CPU or hardware mitigation advisory is outside source-level vulnerability rule generation scope."
+    },
+    "FreeBSD-SA-22:14": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-24:03": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-25:10": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    },
+    "FreeBSD-SA-26:33": {
+      "reason": "External independently maintained package is outside the FreeBSD base-system analysis target."
+    }
+  },
+  "exclude_upstream": {
+    "CVE-2020-29368": {
+      "reason": "Mentioned by OpenSSH compatibility work but is a Linux-kernel CVE, not an OpenSSH vulnerability."
+    },
+    "CVE-2020-29374": {
+      "reason": "Mentioned by OpenSSH compatibility work but is a Linux-kernel CVE, not an OpenSSH vulnerability."
+    },
+    "CVE-2022-2274": {
+      "reason": "Mentioned in OpenSSH history but belongs to OpenSSL and must not be attributed to OpenSSH."
+    },
+    "CVE-2022-42703": {
+      "reason": "Mentioned in OpenSSH history but is a Linux-kernel CVE, not an OpenSSH vulnerability."
+    },
+    "CVE-2016-0718": {
+      "reason": "Branch/merge-name mention was not accepted as a distinct audited Expat source record in v1.4."
+    },
+    "CVE-2026-56131": {
+      "reason": "Landed after the Expat source-history cutoff used for the v1.4 curated snapshot."
+    },
+    "CVE-2026-56132": {
+      "reason": "Landed after the Expat source-history cutoff used for the v1.4 curated snapshot."
+    },
+    "CVE-2026-56412": {
+      "reason": "Landed after the Expat source-history cutoff used for the v1.4 curated snapshot."
+    }
+  },
+  "freebsd_commit_audit": {
+    "FreeBSD-SA-15:01": {
+      "git_hashes": [
+        "94ac8ef8f3b0"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/94ac8ef8f3b0a2d0563cecb30cafe80dee3ea710"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:02": {
+      "git_hashes": [
+        "a2d70c1b1f6e"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a2d70c1b1f6efee36413d0633aa3915e6c3999d6"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:03": {
+      "git_hashes": [
+        "a2d70c1b1f6e"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a2d70c1b1f6efee36413d0633aa3915e6c3999d6"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:04": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-15:06": {
+      "git_hashes": [
+        "4d7eabc985b2"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/4d7eabc985b266b4743bceb9997aedd5828bae14"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:08": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-15:09": {
+      "git_hashes": [
+        "a2e7e7b1c2c0"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a2e7e7b1c2c0aace6030144c495c0cab81c1837b"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:10": {
+      "git_hashes": [
+        "9ab8fb9a4943"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/9ab8fb9a49435f698439f0f08d33444a169626be"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:12": {
+      "git_hashes": [
+        "45c1772ea0e3"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/45c1772ea0e3"
+      ],
+      "reason": "v1.3 audit replaced a Document-r commit with the actual OpenSSL code merge."
+    },
+    "FreeBSD-SA-15:13": {
+      "git_hashes": [
+        "22eb1d6cac2a"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/22eb1d6cac2a0e1836c1ec05c1f3405b02c43079"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:14": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-15:15": {
+      "git_hashes": [
+        "b993ace45610"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b993ace456102e258bb37f92460703e904949f00"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:16": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-15:18": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-15:19": {
+      "git_hashes": [
+        "6bcc74dfb82b"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/6bcc74dfb82b4c42f0a3579284a755aa1a32d77a"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:20": {
+      "git_hashes": [
+        "eb54d706e4e5"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/eb54d706e4e53793d5b77cc6f3fd46234e689b54"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:21": {
+      "git_hashes": [
+        "2558ef53a140"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2558ef53a140a2a8c43348bd9356347b8a6b60ba"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:22": {
+      "git_hashes": [
+        "2157c4cb8772"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2157c4cb8772a7adedb016718bbd516462407b01"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:24": {
+      "git_hashes": [
+        "2757faf97179"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2757faf97179806db8cd93efd546fabd73ed4cd1"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-15:26": {
+      "git_hashes": [
+        "c800785d3a41"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/c800785d3a41149c2ee3644464d9436cca9c1b7d"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:01": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-16:03": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-16:04": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-16:05": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-16:06": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.2 audit cleared a batch-MFC match whose code changes were unrelated to this advisory."
+    },
+    "FreeBSD-SA-16:07": {
+      "git_hashes": [
+        "af0b9f210191"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/af0b9f2101915335df91093d000f4faa8c45a05c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:10": {
+      "git_hashes": [
+        "14882d9c7a69"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/14882d9c7a69a58cf996890a7d06417840fa0618"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:11": {
+      "git_hashes": [
+        "76061d993c05"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/76061d993c05ba35f39d4f5083419629aee1b57c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:12": {
+      "git_hashes": [
+        "2aab9f2e02bf"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2aab9f2e02bfc1930b0c9f7704bee21c4f910a4b"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:14": {
+      "git_hashes": [
+        "c2d52282768a"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/c2d52282768af9a11735b27ed3bc9e8f2e850783"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:15": {
+      "git_hashes": [
+        "49aa3474675b"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/49aa3474675b76102b0651c4f0403645faad0c0f"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:17": {
+      "git_hashes": [
+        "2ae99e0d7b3c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2ae99e0d7b3c82d8e7c80a5c7bb416f8fb495e46"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:18": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-16:19": {
+      "git_hashes": [
+        "9e3c39ad2440"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/9e3c39ad2440fc094fcee685bf3acb58adf8d40b"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:20": {
+      "git_hashes": [
+        "bb678412ec7f"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/bb678412ec7f95a4f38069951f8d204bcf22a326"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:21": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-16:22": {
+      "git_hashes": [
+        "fa7060398ff5"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/fa7060398ff506e875ac10a029f576f313ac4438"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:23": {
+      "git_hashes": [
+        "fa7060398ff5"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/fa7060398ff506e875ac10a029f576f313ac4438"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:25": {
+      "git_hashes": [
+        "b02c62a3c7d1"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b02c62a3c7d1f97d30d17c9a21bcbdbf49124b0f"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:26": {
+      "git_hashes": [
+        "6107c6581a0c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/6107c6581a0c4f2dcc21288dd2bbde22c4909d85"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:27": {
+      "git_hashes": [
+        "aacbc7b7e58e"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/aacbc7b7e58e829b232f64f5d0faf0899eedd561"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:29": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-16:30": {
+      "git_hashes": [
+        "336408d8fb86"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/336408d8fb8655e374326771dcd3211744216900"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:31": {
+      "git_hashes": [
+        "2a6370e2e8dd"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2a6370e2e8ddc5a928c1201c7b21fa3265801bee"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:32": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-16:33": {
+      "git_hashes": [
+        "b51484f94950"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b51484f9495099ad6fbeb0b4f77b1d4215963260"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:35": {
+      "git_hashes": [
+        "400bd32458cc"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/400bd32458ccb4c1f3958134acee1e0082171446"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:36": {
+      "git_hashes": [
+        "35b582285dab"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/35b582285dabe095d850552eafdafad41f265678"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:37": {
+      "git_hashes": [
+        "e2069a8d2aad"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e2069a8d2aadeb09d7da2796782a36f5ce229a52"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-16:38": {
+      "git_hashes": [
+        "186c15aa09b4"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/186c15aa09b47de103d8cea9ef2a2b1b426ea99d"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:01": {
+      "git_hashes": [
+        "b24c303d3028"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b24c303d3028aa8a288a317e00544dcbc4f4c641"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:02": {
+      "git_hashes": [
+        "c612d5e6c5ad"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/c612d5e6c5ad019c1a142e43e9ab4c6359d1ef84"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:04": {
+      "git_hashes": [
+        "8d9fb88b2447"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/8d9fb88b24470a1789dceec40096fa3ce7638c14"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:06": {
+      "git_hashes": [
+        "d4649e920a1d"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/d4649e920a1dc5448f530e327408a351ccc2ccce"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:07": {
+      "git_hashes": [
+        "cfaed0fa41d7"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/cfaed0fa41d7ac3151bcdd1b6450d84fc8451e11"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:08": {
+      "git_hashes": [
+        "799a19dd010b"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/799a19dd010b834001e7496b64543f17953caaff"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:09": {
+      "git_hashes": [
+        "e645cd9871b0"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e645cd9871b0a96a5b89a90106acf8e9e3cd6dd2"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:10": {
+      "git_hashes": [
+        "803389a3c503"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/803389a3c50376ab093341baa32b29fd94d31720"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:11": {
+      "git_hashes": [
+        "a6c99a40328a"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a6c99a40328a373952c7676be0b8ef916f0923c9"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-17:12": {
+      "git_hashes": [
+        "b79493272a47"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b79493272a47bc9c98501c4c03deaf8c0d983287"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:01": {
+      "git_hashes": [
+        "ebdab566341a"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/ebdab566341adf7edaec28bed58bd211882be1a3"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:04": {
+      "git_hashes": [
+        "04dd2e2b5c1d"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/04dd2e2b5c1df77999a18b1674f49113752bfdf7"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:05": {
+      "git_hashes": [
+        "6231fe94c9af"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/6231fe94c9afbc091f40ae541977be26b9ef7e06"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:06": {
+      "git_hashes": [
+        "656ca4cb63d1"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/656ca4cb63d1a6617aed35e67db453542f06b7b2"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:08": {
+      "git_hashes": [
+        "600f1373a2b4"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/600f1373a2b45ce65155944f15ff942d59e26efc"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:10": {
+      "git_hashes": [
+        "deee6872d9cb"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/deee6872d9cb5ff90c1a758bdc8ddc5af999bfce"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:12": {
+      "git_hashes": [
+        "cf3ba93ef2e9"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/cf3ba93ef2e99ac2155e698c22020f1d27e04566"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:13": {
+      "git_hashes": [
+        "795132c5e923"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/795132c5e923c903dab61e4f51750c0f11969757"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:14": {
+      "git_hashes": [
+        "28e817d86beb"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/28e817d86beb17c1dfc256749d91eabc40670c89"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-18:15": {
+      "git_hashes": [
+        "e848f793a385"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e848f793a3853cf43926046c8be339703c79833e"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:01": {
+      "git_hashes": [
+        "474fa6d4f037"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/474fa6d4f037877b112f3f8651f50dd24fd76957"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:02": {
+      "git_hashes": [
+        "99f9f36c3dfa"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/99f9f36c3dfa16e76ecf2e82fab205cf3db4c868"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:03": {
+      "git_hashes": [
+        "5f5f5d2ca9a8"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/5f5f5d2ca9a8d4befdfef30058a06da72f128855"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:05": {
+      "git_hashes": [
+        "972ab8eaf4be"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/972ab8eaf4be3a05d71346f38eb7c3e04199d5bc"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:06": {
+      "git_hashes": [
+        "018b3394cde4"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/018b3394cde4ee8355b56e9ed1d351521010ffb5"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:08": {
+      "git_hashes": [
+        "045f5212d454"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/045f5212d454bd5aafe303be04e48bb90b8f3457"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:09": {
+      "git_hashes": [
+        "3130948d4a40"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/3130948d4a40cf702d8c2fef140467b484ee0715"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:10": {
+      "git_hashes": [
+        "395cc3f57b87"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/395cc3f57b8704e40c1a79a15f5a51b3f8e84f4f"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:11": {
+      "git_hashes": [
+        "c9694cad9466"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/c9694cad94660a17e1ba4d4405b9896e8622a761"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:12": {
+      "git_hashes": [
+        "be12ff6b8f37"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/be12ff6b8f37384a09854d2d56cadb41114a7cd7"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:13": {
+      "git_hashes": [
+        "4260e8800ef8"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/4260e8800ef89969269919ba133c99b29b7dab61"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:14": {
+      "git_hashes": [
+        "47d93ad3e37c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/47d93ad3e37ca890e670009d4c5da5f7d223f85d"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:15": {
+      "git_hashes": [
+        "f24f0dc9a19c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/f24f0dc9a19c5048db9fe401b79ed3762090663b"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:16": {
+      "git_hashes": [
+        "76e7c1980e78"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/76e7c1980e78c74b0c2b3b1e83036d88a10878ad"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:17": {
+      "git_hashes": [
+        "dcb546862747"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/dcb5468627473457cbefcaccf26f08d438a4b3e4"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:18": {
+      "git_hashes": [
+        "12a4559aa3e5"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/12a4559aa3e5cb247f2c3bbf9250bbab63aeabc5"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:19": {
+      "git_hashes": [
+        "0c187c740d76"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/0c187c740d760aff6bd9777b33ac2a67d47facc0"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:20": {
+      "git_hashes": [
+        "e7c851e54a63"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e7c851e54a630edd8ef97e68392a49eaae73fccf"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:21": {
+      "git_hashes": [
+        "c604201d7d8c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/c604201d7d8c817c94e0a200e7d0ae673cae586a"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:22": {
+      "git_hashes": [
+        "dbb9f166cc86"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/dbb9f166cc86e935b98bc74ecdc149d42bab0550"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:23": {
+      "git_hashes": [
+        "a0a60e087318"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a0a60e08731805138b349805d01b6a0f9c0001ff"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-19:24": {
+      "git_hashes": [
+        "f5d936c6d8a6"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/f5d936c6d8a616c4be221b1bfe1755e2ab645d4f"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:01": {
+      "git_hashes": [
+        "d26920de80e3"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/d26920de80e3b30304367182e528bb4332f06b33"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:02": {
+      "git_hashes": [
+        "27bee646a451"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/27bee646a4516c4e737a2adb1f36ec9ac303add0"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:03": {
+      "git_hashes": [
+        "1804b0bd538d"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/1804b0bd538d213793b8374a5ca068a400828ced"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:04": {
+      "git_hashes": [
+        "8274d878c0e1"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/8274d878c0e1ee57563567e2ae8becf75f9143b1"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:05": {
+      "git_hashes": [
+        "03a5d3e78cda"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/03a5d3e78cda9e430d4b921475056a6f17a69c5a"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:06": {
+      "git_hashes": [
+        "9842ed885917"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/9842ed8859172c3553bc3d833fec8bca73256ea6"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:07": {
+      "git_hashes": [
+        "fcfa8e1efd4c"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/fcfa8e1efd4ccee4a497806c4eed5c71d2071b4c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:08": {
+      "git_hashes": [
+        "dd377685f281"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/dd377685f2810780a397577c63e8236e9bd95e8c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:10": {
+      "git_hashes": [
+        "b2139df42d40"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b2139df42d40ad7db79949b01ad30cb74a564f9c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:11": {
+      "git_hashes": [
+        "9c325392eae3"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/9c325392eae38dcb0dea8c9bfa680fc1c945fa59"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:12": {
+      "git_hashes": [
+        "b57b6a8d61cc"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b57b6a8d61cc3d3a4fccb78ec87d6a9b0239d505"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:13": {
+      "git_hashes": [
+        "b57b6a8d61cc"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b57b6a8d61cc3d3a4fccb78ec87d6a9b0239d505"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:14": {
+      "git_hashes": [
+        "033a6fb64cba"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/033a6fb64cbac1547abdece1e9e1c645c51fa494"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:15": {
+      "git_hashes": [
+        "928384869490"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/928384869490921c8ed04dc2aa155cbca53eaefa"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:16": {
+      "git_hashes": [
+        "928384869490"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/928384869490921c8ed04dc2aa155cbca53eaefa"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:17": {
+      "git_hashes": [
+        "bc689c2fb406"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/bc689c2fb406fe5ae3ea591f27752a83113838a6"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:18": {
+      "git_hashes": [
+        "6dfa236dcd29"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/6dfa236dcd29f6d0b1c8f62251bd6214e4f91467"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:20": {
+      "git_hashes": [
+        "e737287d4e7e"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e737287d4e7ed7145749c8fd8235ec930e3665f6"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:21": {
+      "git_hashes": [
+        "8608d8575f01"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/8608d8575f01232c0f93a47d501d38e2e2f6e6ca"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:23": {
+      "git_hashes": [
+        "05267beac514"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/05267beac51492b96fa1a6f2497aedfb819c58bc"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:24": {
+      "git_hashes": [
+        "b4e4841f6486"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b4e4841f6486fcec94645a0ec2a340f8c8eff19a"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:25": {
+      "git_hashes": [
+        "f6ce56c68ca2"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/f6ce56c68ca2daa2bafb2752e4704188bfcf9e3c"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:26": {
+      "git_hashes": [
+        "b2ed812dbd2e"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b2ed812dbd2e0872806aed91ec528ed46271c5ca"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:27": {
+      "git_hashes": [
+        "9dc5a79fdce5"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/9dc5a79fdce5313eba90fca907ab96e48764581e"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:28": {
+      "git_hashes": [
+        "b96e6772dfc6"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b96e6772dfc6ee7a704020d8f7e4a0f8b38edbb0"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:29": {
+      "git_hashes": [
+        "a76dd71a2d14"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/a76dd71a2d142877b19a9b58bbd7d10d8acc253e"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:30": {
+      "git_hashes": [
+        "ff1e565f5a17"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/ff1e565f5a1708c18f58cddf8566bd79cca9cdea"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:31": {
+      "git_hashes": [
+        "229d311aa423"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/229d311aa42306953eb45bc55a8c5ca97312025e"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:32": {
+      "git_hashes": [
+        "e937464e2b89"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e937464e2b89799135b7ba511b9f999573dbb115"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-20:33": {
+      "git_hashes": [
+        "4fbf189781c7"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/4fbf189781c716c626a8893c8aa8a9c391191e57"
+      ],
+      "reason": "SVN-to-Git mapping confirmed by revision, correction date, branch, message, and module paths."
+    },
+    "FreeBSD-SA-21:01": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-21:02": {
+      "git_hashes": [],
+      "github_commit_urls": [],
+      "reason": "v1.4 audit found no trustworthy SVN-to-Git code match; the uncertain hash remains cleared."
+    },
+    "FreeBSD-SA-21:03": {
+      "git_hashes": [
+        "8cf559d6b9b4"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/8cf559d6b9b4782bf67eb868ea480f47fc8c64a4"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-21:04": {
+      "git_hashes": [
+        "b306be13a9c7"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b306be13a9c7ea0db8979a8a53dca93f90ec59cc"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-21:05": {
+      "git_hashes": [
+        "4dd124c3171d"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/4dd124c3171db9cd7fbcc49d8081de590a065d0b"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-21:06": {
+      "git_hashes": [
+        "ab3e1bd3c22a"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/ab3e1bd3c22a222520c23c2793cc39e3a23c9b46"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-21:07": {
+      "git_hashes": [
+        "b6c1fdcdf503"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/b6c1fdcdf503"
+      ],
+      "reason": "v1.4 audit selected the OpenSSL code merge, not the UPDATING/version-only companion commit."
+    },
+    "FreeBSD-SA-21:17": {
+      "git_hashes": [
+        "895e0245469d"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/895e0245469d0d3a267d2685f27d97532c461520"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-23:05": {
+      "git_hashes": [
+        "e374f1ec937f"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/e374f1ec937f70ab2c89e0b392b45a67752c4172"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-23:15": {
+      "git_hashes": [
+        "d2c65a1c9486"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/d2c65a1c9486"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-23:19": {
+      "git_hashes": [
+        "069ac18495ad"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/069ac18495ad"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-24:08": {
+      "git_hashes": [
+        "2abea9df0165"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/2abea9df0165"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-26:19": {
+      "git_hashes": [
+        "4c09834afad0"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/4c09834afad0"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    },
+    "FreeBSD-SA-26:23": {
+      "git_hashes": [
+        "0f15f5359041"
+      ],
+      "github_commit_urls": [
+        "https://github.com/freebsd/freebsd-src/commit/0f15f5359041"
+      ],
+      "reason": "Manual branch/path audit selected the canonical FreeBSD integration code commit(s)."
+    }
+  },
+  "svn_revision_overrides": {
+    "FreeBSD-SA-15:08": {
+      "value": [
+        "281230",
+        "281232"
+      ],
+      "reason": "Preserve the v1.4 audited correction-revision list after a later advisory text revision."
+    },
+    "FreeBSD-SA-23:02": {
+      "value": [],
+      "reason": "The v1.4 record uses the audited Git integration commit and clears obsolete converted-SVN branch revisions."
+    },
+    "FreeBSD-SA-23:15": {
+      "value": [],
+      "reason": "The v1.4 record uses the audited Git integration commit and clears obsolete converted-SVN branch revisions."
+    }
+  },
+  "upstream_source_overrides": {
+    "UPSTREAM-LIBEXPAT-CVE-2026-50219": {
+      "fields": {
+        "year": 2026,
+        "announced": "2026-06-04",
+        "topic": "Merge pull request #1246 from libexpat/introduce-flag-inside-handler",
+        "advisory_raw_url": "https://github.com/libexpat/libexpat/commit/3fd4d1c19c30"
+      },
+      "reason": "Use the earliest CVE-specific upstream change selected during v1.4 audit rather than a later follow-up or merge mention."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2017-9233": {
+      "fields": {
+        "year": 2017,
+        "announced": "2017-06-14",
+        "topic": "Changes: Add CVE-2017-9233 info to change log",
+        "advisory_raw_url": "https://github.com/libexpat/libexpat/commit/01bbdedb665b"
+      },
+      "reason": "Use the earliest CVE-specific upstream change selected during v1.4 audit rather than a later follow-up or merge mention."
+    }
+  },
+  "upstream_integration_audit": {
+    "UPSTREAM-LIBARCHIVE-CVE-2016-1541": {
+      "git_hashes": [],
+      "reason": "The previous 430f7286a566 match was a test-infrastructure merge unrelated to the CVE and was cleared."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2017-14501": {
+      "git_hashes": [
+        "b1c91e4b6cb7"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2024-20696": {
+      "git_hashes": [
+        "bd66c1b43e33"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2024-26256": {
+      "git_hashes": [
+        "bd66c1b43e33"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2025-1632": {
+      "git_hashes": [
+        "2e113ef82465"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2025-25724": {
+      "git_hashes": [
+        "401026e4825a"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2012-6702": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2013-0340": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2016-5300": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2016-9063": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2017-11742": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2017-9233": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2018-20843": {
+      "git_hashes": [
+        "6b2c1e49da28"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2021-45960": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2021-46143": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22822": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22823": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22824": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22825": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22826": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22827": {
+      "git_hashes": [
+        "cc68614da823"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-23852": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-23990": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25235": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25236": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25313": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25314": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25315": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-40674": {
+      "git_hashes": [
+        "71f0c44a0454"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-43680": {
+      "git_hashes": [
+        "dc58b3fca5e7"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45490": {
+      "git_hashes": [
+        "c284f45dc796"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45491": {
+      "git_hashes": [
+        "c284f45dc796"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45492": {
+      "git_hashes": [
+        "c284f45dc796"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-50602": {
+      "git_hashes": [
+        "908f215e80fa"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-8176": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2025-59375": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-24515": {
+      "git_hashes": [
+        "ae04c7bbf065"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32776": {
+      "git_hashes": [
+        "ae04c7bbf065"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32777": {
+      "git_hashes": [
+        "ae04c7bbf065"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32778": {
+      "git_hashes": [
+        "ae04c7bbf065"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-41080": {
+      "git_hashes": [
+        "e3935639d8d8"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-45186": {
+      "git_hashes": [
+        "9cc9b8b37284"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-50219": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSH-CVE-2015-8325": {
+      "git_hashes": [
+        "56e6c4251c09"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSH-CVE-2016-6210": {
+      "git_hashes": [
+        "56e6c4251c09"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSH-CVE-2020-14871": {
+      "git_hashes": [
+        "9e14b918f956"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSH-CVE-2024-7594": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2002-1568": {
+      "git_hashes": [
+        "ed7112f094e2"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2011-4354": {
+      "git_hashes": [
+        "a8fe2d331be3"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2011-4577": {
+      "git_hashes": [
+        "ed7112f094e2"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2014-0224": {
+      "git_hashes": [
+        "4a448cff073e"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0207": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0208": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0285": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0290": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0291": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-1787": {
+      "git_hashes": [
+        "6f9291cea8b0"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-1794": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-3193": {
+      "git_hashes": [
+        "80815a778ec9"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-2018": {
+      "git_hashes": [
+        "b8721c16431d"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-2108": {
+      "git_hashes": [
+        "b8721c16431d"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6305": {
+      "git_hashes": [
+        "aeb5019c481d"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6307": {
+      "git_hashes": [
+        "aeb5019c481d"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6308": {
+      "git_hashes": [
+        "aeb5019c481d"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6309": {
+      "git_hashes": [
+        "f1fe58d376da"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-7053": {
+      "git_hashes": [
+        "6cf8931a2f9f"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-7054": {
+      "git_hashes": [
+        "6cf8931a2f9f"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2017-3733": {
+      "git_hashes": [
+        "ed7112f094e2"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0732": {
+      "git_hashes": [
+        "dea77ea6fc17"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0733": {
+      "git_hashes": [
+        "dee36b4f92f2"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0734": {
+      "git_hashes": [
+        "f07f1918ad5e"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0735": {
+      "git_hashes": [
+        "c9cf7b5cb169"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0737": {
+      "git_hashes": [
+        "dea77ea6fc17"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0739": {
+      "git_hashes": [
+        "dee36b4f92f2"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1543": {
+      "git_hashes": [
+        "610a21fd82f7"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1547": {
+      "git_hashes": [
+        "da327cd22e88"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1549": {
+      "git_hashes": [
+        "610a21fd82f7"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1551": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1559": {
+      "git_hashes": [
+        "6935a639f0f9"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2020-25657": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2020-25659": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2021-23839": {
+      "git_hashes": [
+        "aa906e2a4957"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2021-4044": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2021-4160": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-1292": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-1343": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-1434": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-2068": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-2097": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-29242": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-3358": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-3602": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-37454": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-3786": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-3996": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2022-4203": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0216": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0217": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0401": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0464": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0465": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-0466": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-1255": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-2650": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-2975": {
+      "git_hashes": [
+        "aa7957345732"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-3446": {
+      "git_hashes": [
+        "aa7957345732"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-3817": {
+      "git_hashes": [
+        "aa7957345732"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-4807": {
+      "git_hashes": [
+        "6f1af0d7d2af"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-5363": {
+      "git_hashes": [
+        "ad991e4c142e"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-5678": {
+      "git_hashes": [
+        "e0c4386e7e71"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-6129": {
+      "git_hashes": [
+        "e0c4386e7e71"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-6237": {
+      "git_hashes": [
+        "e0c4386e7e71"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-0727": {
+      "git_hashes": [
+        "e0c4386e7e71"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-12797": {
+      "git_hashes": [
+        "d2a55e6a9348"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-13176": {
+      "git_hashes": [
+        "0d0c8621fd18"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-2511": {
+      "git_hashes": [
+        "44096ebd22dd"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-4603": {
+      "git_hashes": [
+        "44096ebd22dd"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-4741": {
+      "git_hashes": [
+        "44096ebd22dd"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-5535": {
+      "git_hashes": [
+        "a7148ab39c03"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-9143": {
+      "git_hashes": [
+        "0d0c8621fd18"
+      ],
+      "reason": "FreeBSD integration commit confirmed by component path, time window, version/message context, and changed files."
+    },
+    "UPSTREAM-OPENSSL-CVE-2025-4575": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-2673": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-28386": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-28387": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-28388": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-28389": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-28390": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-31789": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-31790": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-35188": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-42765": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    },
+    "UPSTREAM-OPENSSL-CVE-2026-42771": {
+      "git_hashes": [],
+      "reason": "No trustworthy FreeBSD integration commit was confirmed by the v1.4 snapshot; retain as Q2."
+    }
+  },
+  "scope_overrides": {
+    "FreeBSD-SA-16:32": {
+      "value": "kernel",
+      "reason": "The bhyve denial-of-service case belongs to the kernel virtualization track."
+    },
+    "FreeBSD-SA-16:38": {
+      "value": "lib",
+      "reason": "Changed paths and build product place this bhyve fix in the user-space library layer."
+    },
+    "FreeBSD-SA-22:13": {
+      "value": "kernel",
+      "reason": "The affected zlib use and audited fix paths are in the kernel."
+    },
+    "FreeBSD-SA-26:16": {
+      "value": "lib",
+      "reason": "The audited libnv fix is in the user-space library implementation."
+    }
+  },
+  "notes": {
+    "FreeBSD-SA-20:17": {
+      "value": "dual_scope: sys/dev/usb/(kernel) + lib/libusbhid/(userspace) both fixed",
+      "reason": "Preserve a v1.4 manual audit conclusion needed to interpret scope or commit trust."
+    },
+    "FreeBSD-SA-26:08": {
+      "value": "dual_scope: sys/rpc/rpcsec_gss/(kernel) + lib/librpcsec_gss/(userspace) both fixed",
+      "reason": "Preserve a v1.4 manual audit conclusion needed to interpret scope or commit trust."
+    },
+    "FreeBSD-SA-26:19": {
+      "value": "module 'file' refers to file-descriptor vnode ops, not file(1); reclassified to kernel",
+      "reason": "Preserve a v1.4 manual audit conclusion needed to interpret scope or commit trust."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2016-1541": {
+      "value": "hash 430f7286a566 是 test 基础设施 merge commit，与 CVE 无关，已清除",
+      "reason": "Preserve a v1.4 manual audit conclusion needed to interpret scope or commit trust."
+    }
+  },
+  "commit_grade_audit": {
+    "FreeBSD-SA-15:01": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:06": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:10": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:19": {
+      "value": "bundled_multi_module",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:20": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:24": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-15:26": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:07": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:11": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:12": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:14": {
+      "value": "bundled_multi_module",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:17": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:22": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:23": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:25": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:26": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:27": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:33": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:35": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:36": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:37": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-16:38": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-17:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-17:02": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-17:06": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-17:11": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-17:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-18:14": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-18:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:09": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:16": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:18": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:20": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-19:21": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:11": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:18": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:26": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:30": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:32": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-20:33": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:03": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:07": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:13": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:14": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:16": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-21:17": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-22:03": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-22:05": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-22:08": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-22:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-22:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:02": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:03": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:04": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:05": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:07": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:08": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:09": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:16": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-23:19": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:04": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:08": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:10": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:13": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:17": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-24:19": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:03": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:05": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:06": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:07": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:08": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-25:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:01": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:03": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:12": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:15": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:16": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:22": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:23": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:24": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:35": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "FreeBSD-SA-26:36": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2017-14501": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2024-20696": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2024-26256": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2025-1632": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBARCHIVE-CVE-2025-25724": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2013-0340": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2018-20843": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2021-45960": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2021-46143": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22822": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22823": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22824": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22825": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22826": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-22827": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-23852": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-23990": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25235": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25236": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25313": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25314": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-25315": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-40674": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2022-43680": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45490": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45491": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-45492": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2024-50602": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-24515": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32776": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32777": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-32778": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-41080": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-LIBEXPAT-CVE-2026-45186": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSH-CVE-2015-8325": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSH-CVE-2016-6210": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSH-CVE-2020-14871": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2002-1568": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2011-4354": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2011-4577": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2014-0224": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0207": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0208": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0285": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0290": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-0291": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-1787": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2015-3193": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-2018": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-2108": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6305": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6307": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6308": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-6309": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-7053": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2016-7054": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2017-3733": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0732": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0733": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0734": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0735": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0737": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2018-0739": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1543": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1547": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1549": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2019-1559": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2021-23839": {
+      "value": "medium",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-2975": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-3446": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-3817": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-4807": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-5363": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-5678": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-6129": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2023-6237": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-0727": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-12797": {
+      "value": "focused",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-13176": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-2511": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-4603": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-4741": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-5535": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    },
+    "UPSTREAM-OPENSSL-CVE-2024-9143": {
+      "value": "large_concentrated",
+      "reason": "v1.4 manual file-list audit grade used to choose downstream diff extraction strategy."
+    }
+  }
+}
