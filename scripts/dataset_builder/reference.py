@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
+import shutil
 import tempfile
 from typing import Any
 from zipfile import ZipFile
@@ -25,11 +26,17 @@ def validate_reference(output_dir: Path, reference_zip: Path) -> None:
     with tempfile.TemporaryDirectory(prefix="freevrg-reference-") as directory:
         root = Path(directory)
         with ZipFile(reference_zip) as archive:
-            archive.extractall(root)
-        located: dict[str, Path] = {}
-        for path in root.rglob("*"):
-            if path.is_file() and path.name in REQUIRED_REFERENCE_FILES:
-                located[path.name] = path
+            located: dict[str, Path] = {}
+            for member in archive.infolist():
+                name = Path(member.filename).name
+                if member.is_dir() or name not in REQUIRED_REFERENCE_FILES:
+                    continue
+                if name in located:
+                    raise ReferenceMismatch(f"reference ZIP contains duplicate file: {name}")
+                target = root / name
+                with archive.open(member) as source, target.open("wb") as destination:
+                    shutil.copyfileobj(source, destination)
+                located[name] = target
         missing = REQUIRED_REFERENCE_FILES - set(located)
         if missing:
             raise ReferenceMismatch(f"reference ZIP is missing: {sorted(missing)}")

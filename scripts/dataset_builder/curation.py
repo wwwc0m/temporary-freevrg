@@ -5,8 +5,15 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .classification import classify_scope, grade_commit
 from .models import DatasetRecord
-from .sources import FREEBSD_COMMIT, FreeBSDCommitMatcher, UpstreamProject
+from .sources import (
+    FREEBSD_COMMIT,
+    CommitEvidence,
+    FreeBSDCommitMatcher,
+    UpstreamProject,
+    parse_announced_date,
+)
 
 
 class CurationError(ValueError):
@@ -57,8 +64,14 @@ class Curation:
         if audit is not None:
             record.git_hashes = list(audit["git_hashes"])
             record.github_commit_urls = list(audit["github_commit_urls"])
-        elif not record.git_hashes and record.svn_revisions and matcher is not None:
-            record.git_hashes, record.github_commit_urls = matcher.match_svn(record)
+        elif matcher is not None:
+            evidence = None
+            if not record.git_hashes and record.svn_revisions:
+                evidence = matcher.match_svn(record)
+            elif record.git_hashes and parse_announced_date(record.announced) > self.snapshot_date:
+                evidence = matcher.inspect_existing(record)
+            if evidence is not None:
+                self._apply_commit_evidence(record, evidence, module_path_for(record))
 
         revision_override = self.payload.get("svn_revision_overrides", {}).get(record.sa_id)
         if revision_override is not None:
@@ -82,9 +95,29 @@ class Curation:
             record.git_hashes = list(audit["git_hashes"])
             record.github_commit_urls = [f"{FREEBSD_COMMIT}/{item}" for item in record.git_hashes]
         elif matcher is not None:
-            record.git_hashes, record.github_commit_urls = matcher.match_upstream(record, project)
+            evidence = matcher.match_upstream(record, project)
+            if evidence is not None:
+                self._apply_commit_evidence(record, evidence, project.freebsd_path)
         self._apply_common(record)
         return record
+
+    def _apply_commit_evidence(
+        self,
+        record: DatasetRecord,
+        evidence: CommitEvidence,
+        module_path: str | None,
+    ) -> None:
+        record.changed_paths = list(evidence.changed_paths)
+        record.scope_tier = classify_scope(record.module, record.changed_paths)
+        if evidence.noise_only:
+            record.commit_grade = "noise_only"
+            record.git_hashes = []
+            record.github_commit_urls = []
+        else:
+            if record.changed_paths:
+                record.commit_grade = grade_commit(record.changed_paths, module_path)
+            record.git_hashes = evidence.git_hashes
+            record.github_commit_urls = evidence.github_commit_urls
 
     def _apply_common(self, record: DatasetRecord) -> None:
         scope = self.payload.get("scope_overrides", {}).get(record.sa_id)
@@ -134,3 +167,14 @@ def validate_audit_item(item: dict[str, Any], required_fields: tuple[str, ...]) 
             raise CurationError(f"curation item is missing {field}: {item}")
     if not str(item.get("reason", "")).strip():
         raise CurationError(f"curation item has no reason: {item}")
+
+
+def module_path_for(record: DatasetRecord) -> str | None:
+    if record.upstream_path:
+        return record.upstream_path
+    return {
+        "openssl": "crypto/openssl",
+        "openssh": "crypto/openssh",
+        "libarchive": "lib/libarchive",
+        "expat": "lib/libexpat",
+    }.get(record.module.lower())

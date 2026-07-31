@@ -48,6 +48,8 @@ class DatasetRecord:
     source: str | None = None
     upstream_path: str | None = None
     note: str | None = None
+    changed_paths: list[str] = field(default_factory=list, repr=False)
+    upstream_message: str = field(default="", repr=False)
 
     def recompute(self) -> None:
         self.is_priority = self.scope_tier in {"lib", "tool"}

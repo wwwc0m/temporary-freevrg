@@ -22,7 +22,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8.3.0,<9.0.0",
-  "ruff>=0.6.0,<0.16.0",
+  "ruff>=0.6.0,<1.0.0",
 ]
 
 [project.scripts]
@@ -38,7 +38,7 @@ distribution = false
 [tool.pdm.dev-dependencies]
 dev = [
   "pytest>=8.3.0,<9.0.0",
-  "ruff>=0.6.0,<0.16.0",
+  "ruff>=0.6.0,<1.0.0",
 ]
 
 [tool.pdm.scripts]

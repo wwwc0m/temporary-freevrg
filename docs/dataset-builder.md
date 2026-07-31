@@ -14,7 +14,8 @@
 
 Git 仓库缓存在 `--cache-dir/git`。Git 对象库本身就是原始历史缓存；需要 REST commit
 候选详情时，请求按 URL 缓存在 `--cache-dir/http`。HTTP 客户端实现了超时、三次重试、
-限流状态日志和可选 `GITHUB_TOKEN`，日志不会输出令牌。
+限流状态日志和可选 `GITHUB_TOKEN`，日志不会输出令牌。commit search 与 path commit 列表
+按页请求、按完整查询参数逐页缓存，并设置了有限页数的安全上限。
 
 ## 构建逻辑
 
@@ -32,6 +33,8 @@ revision。快照日期之后的公告不会进入结果；ports、外部独立�
 scope 的自动判定优先看修改路径：`sys/` 为 kernel，库产物路径为 lib，用户态命令和守护
 进程为 tool。路径不可得时使用审计过的 module fallback。`is_priority` 严格等价于 scope
 为 lib 或 tool。质量规则为：CVE 和可信 commit 均有是 Q3，只有一个是 Q2，均无是 Q1。
+新记录能取得文件列表时会生成初始 `commit_grade`；纯文档为 `noise_only`，人工 grade 与
+scope 始终最后应用。
 
 ## 人工审计配置
 
@@ -68,6 +71,11 @@ pdm run python scripts/build_dataset.py \
   --offline
 ```
 
+`--offline` 不执行任何 fetch 或 HTTP 请求。普通在线模式每次都会更新远端 ref；`--refresh`
+额外强制刷新 Git ref 与 HTTP 页缓存。缓存仓库会写入 `.freevrg-cache.json`，记录仓库、分支、
+抓取时间、最早可用 commit 日期和最新远端 commit。若较新的浅缓存无法覆盖所需旧快照，在线
+模式会自动 unshallow，离线模式会给出带 `--refresh` 操作提示的错误。
+
 强制刷新官方仓库和 HTTP 缓存：
 
 ```bash
@@ -78,7 +86,7 @@ pdm run python scripts/build_dataset.py --refresh --snapshot-date 2026-06-21
 
 ## 黄金验证
 
-验证器递归定位压缩包内三个目标文件，不依赖压缩包中文根目录名称。JSON 和 CSV 会逐条、
+验证器按压缩包条目名称定位且只安全读取三个目标文件，不依赖压缩包中文根目录名称。JSON 和 CSV 会逐条、
 逐字段比较；XLSX 会比较 Sheet 名称、尺寸、单元格值、冻结窗格、筛选，并确认 commit 单元格
 具有真实 hyperlink。发生差异时会打印第一个不同记录和字段。
 
@@ -98,4 +106,5 @@ kernel、Q3/Q2/Q1 分别为 300/65/3，Q3 且 lib/tool 为 177 条。
 - 空缓存的首次运行需要访问公共 GitHub Git 服务，下载时间取决于网络质量。
 - 对 v1.4 之后的新 SVN 公告或新上游 CVE，启发式匹配仍应人工复核后再升级为 Q3。
 - 未配置令牌时 GitHub REST API 使用匿名限额；限流响应会给出 URL、状态和 reset 信息。
-- `commit_grade` 是人工 diff/file-list 审计结果，不应被简单文件数启发式替代。
+- v1.4 的 `commit_grade` 继续采用 177 项人工审计；快照之后的新记录才在无人工结论时使用
+  changed paths 生成初判。

@@ -27,6 +27,9 @@ ADVISORY_RE = re.compile(r"^FreeBSD-SA-(\d{2}:\d{2})\.(.+)\.asc$")
 FREEBSD_ADVISORY_DIR = "website/static/security/advisories"
 FREEBSD_DOC_RAW = "https://raw.githubusercontent.com/freebsd/freebsd-doc/main"
 FREEBSD_COMMIT = "https://github.com/freebsd/freebsd-src/commit"
+GITHUB_PAGE_SIZE = 100
+GITHUB_MAX_PAGES = 20
+VERSION_RE = re.compile(r"(?<![A-Za-z0-9])v?(\d+\.\d+(?:\.\d+){0,2}[a-z]?)(?![A-Za-z0-9])", re.I)
 
 
 @dataclass(frozen=True, slots=True)
@@ -47,6 +50,23 @@ class UpstreamProject:
     @property
     def commit_url(self) -> str:
         return f"https://github.com/{self.owner}/{self.repository}/commit"
+
+
+@dataclass(frozen=True, slots=True)
+class CommitEvidence:
+    full_shas: tuple[str, ...]
+    changed_paths: tuple[str, ...]
+    messages: tuple[str, ...] = ()
+    committed_dates: tuple[date, ...] = ()
+    noise_only: bool = False
+
+    @property
+    def git_hashes(self) -> list[str]:
+        return [sha[:12] for sha in self.full_shas]
+
+    @property
+    def github_commit_urls(self) -> list[str]:
+        return [f"{FREEBSD_COMMIT}/{sha}" for sha in self.full_shas]
 
 
 UPSTREAM_PROJECTS = (
@@ -111,37 +131,43 @@ class GitRepository:
         self.timeout = timeout
 
     def ensure(self, shallow_since: date) -> None:
+        initialized = False
         if not (self.path / ".git").exists():
             if self.offline:
                 raise SourceError(f"offline cache is missing Git repository: {self.path}")
             self.path.mkdir(parents=True, exist_ok=True)
             self._run("init", "-q")
             self._run("remote", "add", "origin", self.url)
+            initialized = True
 
         remote_ref = f"refs/remotes/origin/{self.branch}"
-        has_ref = self._has_revision(remote_ref) or self._has_revision("FETCH_HEAD")
+        has_ref = any(
+            self._has_revision(revision) for revision in (remote_ref, "FETCH_HEAD", "HEAD")
+        )
         if self.offline:
             if not has_ref:
                 raise SourceError(f"offline Git cache has no usable ref: {self.path}")
             return
-        if has_ref and not self.refresh:
-            return
 
-        refspec = f"+refs/heads/{self.branch}:{remote_ref}"
-        command = (
+        refspec = f"refs/heads/{self.branch}:{remote_ref}"
+        command = [
             "fetch",
-            "--force",
             "--prune",
             "--filter=blob:none",
-            f"--shallow-since={shallow_since.isoformat()}",
+            "--update-shallow",
             "origin",
             refspec,
-        )
+        ]
+        if initialized or self._is_shallow():
+            command.insert(-2, f"--shallow-since={shallow_since.isoformat()}")
+        if self.refresh:
+            command.insert(1, "--force")
         last_error: Exception | None = None
         for attempt in range(1, 4):
             try:
                 LOGGER.info("fetching %s (attempt %d/3)", self.url, attempt)
                 self._run(*command, timeout=self.timeout)
+                self._write_metadata()
                 return
             except SourceError as exc:
                 last_error = exc
@@ -156,8 +182,29 @@ class GitRepository:
             base_ref = "FETCH_HEAD" if self._has_revision("FETCH_HEAD") else "HEAD"
         cutoff = datetime.combine(snapshot_date, time.max, tzinfo=timezone.utc).isoformat()
         revision = self._run("rev-list", "-1", f"--before={cutoff}", base_ref).strip()
+        if not revision and self._is_shallow():
+            if self.offline:
+                raise SourceError(
+                    f"offline Git cache at {self.path} is too shallow for {snapshot_date}; "
+                    "rerun online with --refresh to deepen it"
+                )
+            LOGGER.info("deepening %s to resolve snapshot %s", self.url, snapshot_date)
+            remote_ref = f"refs/remotes/origin/{self.branch}"
+            self._run(
+                "fetch",
+                "--unshallow",
+                "origin",
+                f"refs/heads/{self.branch}:{remote_ref}",
+                timeout=self.timeout,
+            )
+            self._write_metadata()
+            base_ref = remote_ref if self._has_revision(remote_ref) else base_ref
+            revision = self._run("rev-list", "-1", f"--before={cutoff}", base_ref).strip()
         if not revision:
-            raise SourceError(f"no {self.url} revision exists on or before {snapshot_date}")
+            raise SourceError(
+                f"no cached {self.url} revision exists on or before {snapshot_date}; "
+                "check the requested snapshot or rerun online with --refresh"
+            )
         return revision
 
     def materialize(self, revision: str, sparse_path: str) -> Path:
@@ -191,6 +238,27 @@ class GitRepository:
             check=False,
         )
         return result.returncode == 0
+
+    def _is_shallow(self) -> bool:
+        return self._run("rev-parse", "--is-shallow-repository").strip() == "true"
+
+    def _write_metadata(self) -> None:
+        base_ref = f"refs/remotes/origin/{self.branch}"
+        if not self._has_revision(base_ref):
+            base_ref = "FETCH_HEAD" if self._has_revision("FETCH_HEAD") else "HEAD"
+        root_sha = self._run("rev-list", "--max-parents=0", base_ref).splitlines()[0]
+        earliest = self._run("show", "-s", "--format=%aI", root_sha).strip()
+        payload = {
+            "repository_url": self.url,
+            "branch": self.branch,
+            "last_fetched_at": datetime.now(timezone.utc).isoformat(),
+            "earliest_available_commit_date": earliest,
+            "latest_remote_commit": self._run("rev-parse", base_ref).strip(),
+        }
+        metadata = self.path / ".freevrg-cache.json"
+        temporary = metadata.with_suffix(".tmp")
+        temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        os.replace(temporary, metadata)
 
     def _run(self, *arguments: str, timeout: int = 60) -> str:
         try:
@@ -275,10 +343,11 @@ class GitHubClient:
         raise SourceError(f"GitHub request failed after 3 attempts: {url}: {last_error}")
 
     def search_commits(self, query: str) -> list[dict[str, Any]]:
-        payload = self.get_json(
-            "https://api.github.com/search/commits", {"q": query, "per_page": 100}
+        return self._get_all_pages(
+            "https://api.github.com/search/commits",
+            {"q": query},
+            items_key="items",
         )
-        return list(payload.get("items", []))
 
     def commit(self, owner: str, repository: str, sha: str) -> dict[str, Any]:
         return self.get_json(f"https://api.github.com/repos/{owner}/{repository}/commits/{sha}")
@@ -286,25 +355,63 @@ class GitHubClient:
     def commits_for_path(
         self, owner: str, repository: str, path: str, since: date, until: date
     ) -> list[dict[str, Any]]:
-        return list(
-            self.get_json(
-                f"https://api.github.com/repos/{owner}/{repository}/commits",
-                {
-                    "path": path,
-                    "since": f"{since.isoformat()}T00:00:00Z",
-                    "until": f"{until.isoformat()}T23:59:59Z",
-                    "per_page": 100,
-                },
-            )
+        return self._get_all_pages(
+            f"https://api.github.com/repos/{owner}/{repository}/commits",
+            {
+                "path": path,
+                "since": f"{since.isoformat()}T00:00:00Z",
+                "until": f"{until.isoformat()}T23:59:59Z",
+            },
         )
+
+    def _get_all_pages(
+        self,
+        url: str,
+        parameters: dict[str, str | int],
+        *,
+        items_key: str | None = None,
+    ) -> list[dict[str, Any]]:
+        results: list[dict[str, Any]] = []
+        for page in range(1, GITHUB_MAX_PAGES + 1):
+            page_parameters = {
+                **parameters,
+                "per_page": GITHUB_PAGE_SIZE,
+                "page": page,
+            }
+            payload = self.get_json(url, page_parameters)
+            raw_items = payload.get(items_key, []) if items_key else payload
+            if not isinstance(raw_items, list):
+                raise SourceError(f"unexpected paginated GitHub response from {url}")
+            items = [item for item in raw_items if isinstance(item, dict)]
+            results.extend(items)
+            if len(raw_items) < GITHUB_PAGE_SIZE:
+                break
+        else:
+            LOGGER.warning("stopped GitHub pagination at safety limit %d: %s", GITHUB_MAX_PAGES, url)
+        return results
 
 
 class FreeBSDCommitMatcher:
     def __init__(self, client: GitHubClient) -> None:
         self.client = client
 
-    def match_svn(self, record: DatasetRecord) -> tuple[list[str], list[str]]:
-        candidates: dict[str, tuple[int, str]] = {}
+    def inspect_existing(self, record: DatasetRecord) -> CommitEvidence | None:
+        evidence: list[CommitEvidence] = []
+        for sha in record.git_hashes:
+            try:
+                detail = self.client.commit("freebsd", "freebsd-src", sha)
+            except SourceError as exc:
+                LOGGER.warning("cannot inspect existing FreeBSD commit %s: %s", sha, exc)
+                return None
+            evidence.append(commit_evidence_from_detail(detail, sha))
+        if not evidence:
+            return None
+        code = [item for item in evidence if not item.noise_only]
+        selected = code or evidence
+        return combine_commit_evidence(selected, noise_only=not code)
+
+    def match_svn(self, record: DatasetRecord) -> CommitEvidence | None:
+        candidates: dict[str, tuple[int, CommitEvidence]] = {}
         announced = parse_announced_date(record.announced)
         for revision in record.svn_revisions:
             query = (
@@ -315,20 +422,33 @@ class FreeBSDCommitMatcher:
                 sha = str(item.get("sha", ""))
                 if not sha:
                     continue
-                detail = self.client.commit("freebsd", "freebsd-src", sha)
-                paths = [file.get("filename", "") for file in detail.get("files", [])]
-                message = str(detail.get("commit", {}).get("message", ""))
-                if is_document_only_commit(message, paths):
+                try:
+                    detail = self.client.commit("freebsd", "freebsd-src", sha)
+                except SourceError as exc:
+                    LOGGER.warning("cannot inspect SVN candidate %s: %s", sha, exc)
                     continue
-                score = score_commit_candidate(record.module, record.topic, paths, message, revision)
+                evidence = commit_evidence_from_detail(detail, sha)
+                if evidence.noise_only:
+                    continue
+                score = score_commit_candidate(
+                    record.module,
+                    record.topic,
+                    evidence.changed_paths,
+                    evidence.messages[0],
+                    revision,
+                )
                 if score >= 4:
-                    candidates[sha] = max(candidates.get(sha, (-1, "")), (score, sha))
-        ordered = [sha for _, sha in sorted(candidates.values(), reverse=True)[:1]]
-        return [sha[:12] for sha in ordered], [f"{FREEBSD_COMMIT}/{sha}" for sha in ordered]
+                    full_sha = evidence.full_shas[0]
+                    current = candidates.get(full_sha)
+                    if current is None or score > current[0]:
+                        candidates[full_sha] = (score, evidence)
+        if not candidates:
+            return None
+        return max(candidates.values(), key=lambda item: item[0])[1]
 
     def match_upstream(
         self, record: DatasetRecord, project: UpstreamProject
-    ) -> tuple[list[str], list[str]]:
+    ) -> CommitEvidence | None:
         announced = parse_announced_date(record.announced)
         candidates = self.client.commits_for_path(
             "freebsd",
@@ -337,19 +457,97 @@ class FreeBSDCommitMatcher:
             announced - timedelta(days=30),
             announced + timedelta(days=730),
         )
-        best: tuple[int, str] | None = None
+        best: tuple[int, CommitEvidence] | None = None
         for item in candidates:
             sha = str(item.get("sha", ""))
-            message = str(item.get("commit", {}).get("message", ""))
+            if not sha:
+                continue
+            try:
+                detail = self.client.commit("freebsd", "freebsd-src", sha)
+            except SourceError as exc:
+                LOGGER.warning("cannot inspect upstream candidate %s: %s", sha, exc)
+                continue
+            evidence = commit_evidence_from_detail(detail, sha)
+            if not evidence.committed_dates:
+                continue
+            committed = evidence.committed_dates[0]
+            if not announced - timedelta(days=30) <= committed <= announced + timedelta(days=730):
+                continue
+            if evidence.noise_only:
+                continue
+            if not paths_touch_module(evidence.changed_paths, project.freebsd_path):
+                continue
+            message = evidence.messages[0]
+            if not has_upstream_link_signal(record, message):
+                continue
             score = score_commit_candidate(
-                record.module, record.topic, [project.freebsd_path], message, record.cve[0]
+                record.module,
+                record.topic,
+                evidence.changed_paths,
+                message,
+                record.cve[0] if record.cve else "",
             )
             if best is None or score > best[0]:
-                best = (score, sha)
-        if best is None or best[0] < 3:
-            return [], []
-        short = best[1][:12]
-        return [short], [f"{FREEBSD_COMMIT}/{short}"]
+                best = (score, evidence)
+        return best[1] if best is not None else None
+
+
+def commit_evidence_from_detail(detail: dict[str, Any], requested_sha: str) -> CommitEvidence:
+    sha = str(detail.get("sha") or requested_sha)
+    commit = detail.get("commit") if isinstance(detail.get("commit"), dict) else {}
+    message = str(commit.get("message", ""))
+    paths = tuple(
+        str(file.get("filename", ""))
+        for file in detail.get("files", [])
+        if isinstance(file, dict) and file.get("filename")
+    )
+    committed = parse_github_commit_date(commit)
+    return CommitEvidence(
+        full_shas=(sha,),
+        changed_paths=paths,
+        messages=(message,),
+        committed_dates=(committed,) if committed else (),
+        noise_only=is_document_only_commit(message, paths),
+    )
+
+
+def combine_commit_evidence(
+    evidence: Iterable[CommitEvidence], *, noise_only: bool = False
+) -> CommitEvidence:
+    items = list(evidence)
+    return CommitEvidence(
+        full_shas=tuple(sha for item in items for sha in item.full_shas),
+        changed_paths=tuple(unique(path for item in items for path in item.changed_paths)),
+        messages=tuple(message for item in items for message in item.messages),
+        committed_dates=tuple(value for item in items for value in item.committed_dates),
+        noise_only=noise_only,
+    )
+
+
+def parse_github_commit_date(commit: dict[str, Any]) -> date | None:
+    for key in ("committer", "author"):
+        person = commit.get(key)
+        if not isinstance(person, dict) or not person.get("date"):
+            continue
+        try:
+            return datetime.fromisoformat(str(person["date"]).replace("Z", "+00:00")).date()
+        except ValueError:
+            continue
+    return None
+
+
+def paths_touch_module(changed_paths: Iterable[str], module_path: str) -> bool:
+    prefix = module_path.rstrip("/")
+    return any(path == prefix or path.startswith(f"{prefix}/") for path in changed_paths)
+
+
+def has_upstream_link_signal(record: DatasetRecord, candidate_message: str) -> bool:
+    message_upper = candidate_message.upper()
+    if any(cve.upper() in message_upper for cve in record.cve):
+        return True
+    upstream_versions = set(VERSION_RE.findall(f"{record.upstream_message}\n{record.topic}"))
+    candidate_versions = set(VERSION_RE.findall(candidate_message))
+    return bool(upstream_versions & candidate_versions)
 
 
 def score_commit_candidate(
@@ -358,7 +556,7 @@ def score_commit_candidate(
     text = f"{message}\n{topic}".lower()
     normalized_module = module.lower()
     score = 0
-    if needle.lower() in text:
+    if needle and needle.lower() in text:
         score += 4
     if normalized_module and normalized_module in text:
         score += 2
@@ -487,6 +685,7 @@ def records_from_upstream_log(
                 diff_available=False,
                 source="upstream_commit",
                 upstream_path=project.freebsd_path,
+                upstream_message=message,
             )
             record.recompute()
             records.append(record)
