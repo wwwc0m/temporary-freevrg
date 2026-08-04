@@ -59,6 +59,10 @@ class AppConfig:
             prefix = "RULE"
             model = self.rule_model
             temperature = self.rule_temperature
+        elif normalized == "harness":
+            prefix = "RULE"
+            model = self.rule_model
+            temperature = self.rule_temperature
         else:
             raise ValueError(f"Unsupported agent profile: {agent_name}")
         return LLMProfile(

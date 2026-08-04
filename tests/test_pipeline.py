@@ -9,6 +9,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from agents.harness_agent import HarnessAgent
 from agents.rule_agent import RuleAgent
 from core.config import AppConfig, load_config
 from core.orchestrator import Orchestrator
@@ -196,7 +197,7 @@ class PipelineTests(unittest.TestCase):
                 pattern_temperature=0.0,
                 rule_temperature=0.0,
                 max_repair_rounds=1,
-                codeql_path="codeql",
+                codeql_path="missing-codeql-executable",
                 samples_dir=root / "samples",
                 patterns_dir=root / "patterns",
                 rules_dir=root / "rules",
@@ -452,6 +453,86 @@ select function, "Connectivity smoke result."
 
             self.assertIn("new.TaintTracking", output)
             self.assertIn("import FreeVRGTestFlow::PathGraph", output)
+
+    def test_harness_agent_generates_local_pair_from_sample_code(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            sample_path = root / "sample.json"
+            sample_path.write_text(
+                json.dumps(
+                    {
+                        "id": "FreeBSD-SA-HARNESS",
+                        "cve": ["CVE-2020-7461"],
+                        "subsystem": "dhclient",
+                        "diff": "+if (pointed_len < 0) return (-1);",
+                        "before_code": {
+                            "sbin/dhclient/options.c::find_search_domain_name_len": (
+                                "int find_search_domain_name_len(struct option_data *option, "
+                                "size_t *offset)\n"
+                                "{\n"
+                                "    int pointed_len;\n"
+                                "    pointed_len = find_search_domain_name_len(option, offset);\n"
+                                "    return pointed_len + 1;\n"
+                                "}\n"
+                            )
+                        },
+                        "after_code": {
+                            "sbin/dhclient/options.c::find_search_domain_name_len": (
+                                "int find_search_domain_name_len(struct option_data *option, "
+                                "size_t *offset)\n"
+                                "{\n"
+                                "    int pointed_len;\n"
+                                "    pointed_len = find_search_domain_name_len(option, offset);\n"
+                                "    if (pointed_len < 0) {\n"
+                                "        return -1;\n"
+                                "    }\n"
+                                "    return pointed_len + 1;\n"
+                                "}\n"
+                            )
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            sample = SampleRecord.from_path(sample_path)
+            agent = HarnessAgent(_make_config(root))
+
+            harnesses = agent.generate_harness_pair(sample)
+
+            self.assertIn("struct option_data", harnesses["vulnerable_harness"])
+            self.assertIn("pointed_len + 1", harnesses["vulnerable_harness"])
+            self.assertIn("if (pointed_len < 0)", harnesses["fixed_harness"])
+            self.assertTrue(harnesses["vulnerable_harness"].endswith("\n"))
+            self.assertTrue(harnesses["fixed_harness"].endswith("\n"))
+
+    def test_harness_agent_accepts_json_model_output(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            sample_path = root / "sample.json"
+            sample_path.write_text(
+                json.dumps(
+                    {
+                        "id": "FreeBSD-SA-HARNESS-LLM",
+                        "cve": ["CVE-2020-7461"],
+                        "before_code": {"file.c::target": "int target(void) { return 1; }"},
+                        "after_code": {"file.c::target": "int target(void) { return 0; }"},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            agent = HarnessAgent(_make_config(root))
+            model_output = json.dumps(
+                {
+                    "vulnerable_harness": "#include <stddef.h>\nint target(void) { return 1; }",
+                    "fixed_harness": "#include <stddef.h>\nint target(void) { return 0; }",
+                }
+            )
+
+            with patch.object(agent, "invoke_model", return_value=f"```json\n{model_output}\n```"):
+                harnesses = agent.generate_harness_pair(SampleRecord.from_path(sample_path))
+
+            self.assertIn("return 1", harnesses["vulnerable_harness"])
+            self.assertIn("return 0", harnesses["fixed_harness"])
 
     def test_rule_agent_rejects_incompatible_codeql_profiles(self) -> None:
         invalid_outputs = {

@@ -234,6 +234,12 @@ data/results/*
 codeql-db/
 codeql-dbs/
 codeql-results/
+vendor/
+data/generated-harnesses/
+codeql/first-pilot/minimal-validation-databases/fake-bin/
+codeql/first-pilot/minimal-validation-databases/objects/
+codeql/first-pilot/queries/qlpack.yml
+codeql/first-pilot/validation/smoke-failures.txt
 
 # Local logs
 logs/

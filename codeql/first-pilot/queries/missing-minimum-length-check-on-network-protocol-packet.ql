@@ -70,7 +70,7 @@ predicate isPacketLengthVariable(Variable value, Function function) {
     isAssignedFromParserCall(value, function) or
     hasDirectLengthName(value) and isAssignedFromPacketBytes(value, function) or
     isProtocolParsingFunction(function) and
-    (value instanceof Parameter or value instanceof Field)
+    value instanceof Parameter
   )
 }
 
