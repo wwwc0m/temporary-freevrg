@@ -241,6 +241,15 @@ The current pipeline will:
 - generate a `.ql` file
 - write a placeholder validation result
 
+To rebuild the v1.4 vulnerability index from the official source histories, see
+[`docs/dataset-builder.md`](docs/dataset-builder.md). The short form is:
+
+```bash
+pdm run python scripts/build_dataset.py \
+  --output-dir data/dataset \
+  --snapshot-date 2026-06-21
+```
+
 To inspect traces in Langfuse:
 
 1. Open `https://cloud.langfuse.com`

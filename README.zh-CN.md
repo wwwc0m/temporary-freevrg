@@ -248,6 +248,15 @@ pdm run python main.py data/samples/<sample-file>
 - 生成一个 `.ql` 文件
 - 写入一个占位的校验结果
 
+如需从官方来源历史重新构建 v1.4 漏洞索引，请参阅
+[`docs/dataset-builder.md`](docs/dataset-builder.md)。最简命令如下：
+
+```bash
+pdm run python scripts/build_dataset.py \
+  --output-dir data/dataset \
+  --snapshot-date 2026-06-21
+```
+
 查看 Langfuse trace：
 
 1. 打开 `https://cloud.langfuse.com`
