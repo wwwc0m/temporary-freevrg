@@ -252,6 +252,20 @@ pdm run python main.py data/samples/<sample-file>
 - 生成一个 `.ql` 文件
 - 写入一个占位的校验结果
 
+如果需要控制 QL 规则的扫描范围和语义抽象程度，可以基于已生成的 pattern 生成多个 rule variant：
+
+```bash
+pdm run python scripts/generate_rule_variants.py \
+  data/patterns/<pattern-file>.md \
+  --variant exact:syntactic \
+  --variant component:dataflow \
+  --variant freebsd:semantic \
+  --overwrite
+```
+
+其中 `exact/component/freebsd/upstream` 控制扫哪里，`syntactic/structural/dataflow/semantic`
+控制规则用多强的漏洞语义来描述问题。
+
 如需从官方来源历史重新构建 v1.4 漏洞索引，请参阅
 [`docs/dataset-builder.md`](docs/dataset-builder.md)。最简命令如下：
 

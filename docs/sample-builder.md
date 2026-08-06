@@ -96,6 +96,33 @@ pdm run python scripts/split_multi_cve_sample.py \
 推荐流程是：多 CVE sample 先拆分，人工确认低置信度 child，再对单 CVE child 运行
 `main.py`、`generate_harnesses.py` 和机制级 CodeQL 校验。
 
+## 规则泛化变体
+
+通过主链路生成 pattern 后，可以为同一个 pattern 生成多种 QL rule variant。variant 由两部分组成：
+
+- `scope`：控制扫哪里，支持 `exact`、`component`、`freebsd`、`upstream`
+- `semantic`：控制规则描述能力，支持 `syntactic`、`structural`、`dataflow`、`semantic`
+
+示例：
+
+```bash
+pdm run python scripts/generate_rule_variants.py \
+  data/patterns/freebsd-sa-20-26.md \
+  --variant exact:syntactic \
+  --variant component:dataflow \
+  --variant freebsd:semantic \
+  --overwrite
+```
+
+默认会生成：
+
+- `exact-syntactic`：用于历史 harness / 回归验证
+- `component-dataflow`：用于当前 FreeBSD 对应模块扫描
+- `freebsd-semantic`：用于更宽的 FreeBSD 全源码候选发现
+
+每次生成会额外写出 `<pattern>.rule-variants.json` manifest，记录每条变体的 `scope_level`、
+`semantic_level` 和输出路径。
+
 ## 后续链路
 
 生成 sample 后运行主链路：

@@ -14,6 +14,7 @@ from agents.rule_agent import RuleAgent
 from core.config import AppConfig, load_config
 from core.orchestrator import Orchestrator
 from core.models import SampleRecord, ValidationResult
+from core.rule_variant import RuleVariant, parse_rule_variant
 from core.validator import Validator
 
 
@@ -453,6 +454,31 @@ select function, "Connectivity smoke result."
 
             self.assertIn("new.TaintTracking", output)
             self.assertIn("import FreeVRGTestFlow::PathGraph", output)
+
+    def test_rule_agent_includes_variant_controls_in_model_prompt(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            agent = RuleAgent(_make_config(Path(tmp_dir)))
+            captured_prompt = ""
+
+            def capture_prompt(*, user_prompt: str) -> str:
+                nonlocal captured_prompt
+                captured_prompt = user_prompt
+                return _valid_ast_query()
+
+            with patch.object(agent, "invoke_model", side_effect=capture_prompt):
+                agent.generate_rule(
+                    "# Pattern: variant-smoke\n\n## Historical Instances\n- files_changed: sys/net/a.c",
+                    variant=RuleVariant("component", "dataflow"),
+                )
+
+            self.assertIn("target_scope: component", captured_prompt)
+            self.assertIn("semantic_strength: dataflow", captured_prompt)
+            self.assertIn("Encode the target scope in CodeQL predicates", captured_prompt)
+
+    def test_parse_rule_variant_accepts_scope_semantic_forms(self) -> None:
+        self.assertEqual(parse_rule_variant("component:dataflow").slug, "component-dataflow")
+        self.assertEqual(parse_rule_variant("freebsd/semantic").slug, "freebsd-semantic")
+        self.assertEqual(parse_rule_variant("exact-syntactic").slug, "exact-syntactic")
 
     def test_harness_agent_generates_local_pair_from_sample_code(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
