@@ -257,6 +257,21 @@ pdm run python scripts/build_dataset.py \
   --snapshot-date 2026-06-21
 ```
 
+如需将漏洞索引中的 commit / URL 记录转换为 Agent 主链路样本，请参阅
+[`docs/sample-builder.md`](docs/sample-builder.md)。典型链路是：
+
+```bash
+pdm run python scripts/build_samples.py \
+  --dataset data/dataset/dataset_index.json \
+  --freebsd-src vendor/freebsd-src \
+  --output-dir data/samples \
+  --sa-id FreeBSD-SA-20:26 \
+  --fetch-missing \
+  --overwrite
+
+pdm run python main.py data/samples/freebsd-sa-20-26.json
+```
+
 查看 Langfuse trace：
 
 1. 打开 `https://cloud.langfuse.com`
