@@ -51,7 +51,7 @@ class AppConfig:
 
     def profile_for(self, agent_name: str) -> LLMProfile:
         normalized = agent_name.strip().lower()
-        if normalized == "pattern":
+        if normalized in {"pattern", "multi-cve"}:
             prefix = "PATTERN"
             model = self.pattern_model
             temperature = self.pattern_temperature

@@ -21,7 +21,8 @@ Agent 主链路需要的结构化样本。
 - `after_code`
 - `context.target_functions`
 
-这些字段可直接供 `PatternAgent`、`RuleAgent` 和 `HarnessAgent` 使用。
+这些字段可直接供 `PatternAgent`、`RuleAgent` 和 `HarnessAgent` 使用。多 CVE SA 需要先经过
+`MultiCveAgent` 拆分为单 CVE child sample，再进入主链路。
 
 ## 使用
 
@@ -59,7 +60,7 @@ pdm run python scripts/build_samples.py \
 
 ## 当前策略
 
-第一版只处理单 CVE、FreeBSD-SA、且有 Git commit 的记录。它会：
+基础构建器默认只处理单 CVE、FreeBSD-SA、且有 Git commit 的记录。它会：
 
 1. 从 dataset 选择 fix commit。
 2. 用 `git show --find-renames --unified=80` 取得 fix diff。
@@ -70,6 +71,30 @@ pdm run python scripts/build_samples.py \
 
 该脚本不负责判断漏洞语义，也不负责生成 harness。harness 生成仍由
 `scripts/generate_harnesses.py` 和 `HarnessAgent` 完成。
+
+## 多 CVE 拆分
+
+多 CVE SA 不能把同一份综合 diff 无差别复制给每个 CVE 后直接生成正式规则。当前项目增加了
+`MultiCveAgent`，用于读取一个已经包含 `advisory_text`、`diff`、`before_code`、`after_code`
+的多 CVE sample，并输出多个单 CVE child sample：
+
+```bash
+pdm run python scripts/split_multi_cve_sample.py \
+  data/samples/多CVE/FreeBSD-SA-XX-YY.json \
+  --output-dir data/samples/split \
+  --overwrite
+```
+
+输出 child sample 会保留：
+
+- `source_sa`：原始 SA 溯源
+- `cve`：单 CVE 列表
+- `context.multi_cve_split.evidence_mode`：`exact_patch`、`child_commit_exact`、
+  `cve_guided_composite` 或 `ambiguous`
+- `context.requires_human_review`：非高置信精确证据默认需要人工复核
+
+推荐流程是：多 CVE sample 先拆分，人工确认低置信度 child，再对单 CVE child 运行
+`main.py`、`generate_harnesses.py` 和机制级 CodeQL 校验。
 
 ## 后续链路
 
@@ -94,4 +119,3 @@ CODEQL=/home/wwwcom/.local/bin/codeql CC=/usr/bin/clang \
 
 然后将 `.env` 的 `VALIDATION_DATABASES_DIR` 指向对应 `db` 目录，再运行主链路或直接调用
 `Validator`。
-

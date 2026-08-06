@@ -15,6 +15,7 @@ FreeVRG 的含义是 `FreeBSD Vulnerability Rule Generator`，即 `FreeBSD 漏�
 在当前原型中：
 
 - `Pattern Agent` 读取结构化漏洞样本并提炼可复用模式
+- `MultiCveAgent` 将一个 SA 中的多个 CVE 拆成单 CVE child sample，避免混合 diff 直接进入规则生成
 - `Rule Agent` 将模式转换为 CodeQL 查询原型
 - `Validator` 负责确定性校验与结果落盘
 
@@ -24,7 +25,10 @@ FreeVRG 的含义是 `FreeBSD Vulnerability Rule Generator`，即 `FreeBSD 漏�
 flowchart TD
     A[硬规则: 准备历史漏洞样本] --> B[硬规则: 按时间切分数据集]
     B --> C[硬规则: 训练集进入规则生成流程]
-    C --> D[硬规则: 加载 .env 配置]
+    C --> C1{是否多 CVE SA}
+    C1 -->|是| C2[模型: MultiCveAgent 拆成单 CVE child sample]
+    C1 -->|否| D[硬规则: 加载 .env 配置]
+    C2 --> D
     D --> E[硬规则: 整理样本内容]
     E --> F[硬规则: 发送给 Pattern Agent]
     F --> G[模型: 提炼漏洞模式]
