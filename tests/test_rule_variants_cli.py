@@ -67,6 +67,8 @@ def test_generate_rule_variants_cli_writes_rules_and_manifest(tmp_path: Path) ->
     assert manifest_path.exists()
     assert "@id freevrg/demo-pattern-exact-syntactic" in exact_rule.read_text(encoding="utf-8")
     assert 'target.getName() = "memcpy"' in exact_rule.read_text(encoding="utf-8")
+    assert 'name = "packet"' in exact_rule.read_text(encoding="utf-8")
+    assert "isPatternSourceHint =" not in exact_rule.read_text(encoding="utf-8")
     assert "sys/net/a.c" in exact_rule.read_text(encoding="utf-8")
     assert "sys/net/" in component_rule.read_text(encoding="utf-8")
 

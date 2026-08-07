@@ -76,9 +76,9 @@ class RuleAgent(BaseAgent):
             historical_files = self._extract_historical_files(pattern_text)
 
             sink_predicate = self._build_name_predicate("target.getName()", sink_names)
-            source_predicate = self._build_name_predicate("isPatternSourceHint", source_names)
+            source_predicate = self._build_name_predicate("name", source_names)
             sanitizer_predicate = self._build_name_predicate(
-                "isPatternSanitizerHint", sanitizer_names
+                "name", sanitizer_names
             )
             feedback_block = self._format_feedback(validation_feedback)
             metadata_description = description.replace("*/", "* /")
